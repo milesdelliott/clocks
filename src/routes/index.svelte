@@ -11,5 +11,4 @@
     });
 
 </script>
-<h1>Clocks</h1>
 <svelte:component time={time} this={Clock}/>
