@@ -1,12 +1,11 @@
 <script lang="typescript">
-    import get12Hour from '$lib/get12Hour'
+    import getProgress from '$lib/getProgress'
     import hourNumbers from '$lib/hourNumbers'
     export let time : Date = new Date();
-    $: hour = time.getHours();
-    $: minute = time.getMinutes();
-    $: height = (((get12Hour(hour) * 60 + minute) / 720) * 50) - 6
+    $: progress = getProgress(time);
+    $: minutes = progress.minutes * 50
+    $: height = (progress.period * 50) - 6
 </script>
-<p>{get12Hour(hour)}:{minute}</p>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-1 -1 12 52">
     <defs>
         <filter id="neon"  y="-90%" height="290%"  x="-60%" width="220%">
@@ -23,9 +22,9 @@
     <path  class="highlight" d="M 10 0 v 50 h -10" />
     <path  class="reflection" d="M -0.4 {height - 2.5} v 10" />
     <path  class="reflection" d="M 10.4 {height - 2.5} v 10" />
-    <path  class="reflection" d="M -0.4 {((minute/60) * 50) - 0.75} v 3" />
-    <path  class="reflection" d="M 10.4 {((minute/60) * 50) - 0.75} v 3" />
-    <rect  filter="url(#neon)" class="marker" width="10" height="1" x="0" y={(minute/60) * 50} />
+    <path  class="reflection" d="M -0.4 {minutes - 0.75} v 3" />
+    <path  class="reflection" d="M 10.4 {minutes - 0.75} v 3" />
+    <rect  filter="url(#neon)" class="marker" width="10" height="1" x="0" y={minutes} />
     <rect  filter="url(#neon)" class="hour" width="10" height="5" x="0" y={height} />
     {#each hourNumbers as hourNumber, i }
      <text x="5" y={hourNumber * 4}>{hourNumber}</text>

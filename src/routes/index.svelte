@@ -1,6 +1,7 @@
 <script lang="typescript">
     import { onMount } from 'svelte';
-    import Lumen from './c/lumen.svelte'
+    import randomClock from '$lib/randomClock'
+    const Clock = randomClock()
     let time: Date = new Date();
     const checkTime = () => {
         time = new Date()
@@ -11,4 +12,4 @@
 
 </script>
 <h1>Clocks</h1>
-<Lumen time={time} />
+<svelte:component time={time} this={Clock}/>
