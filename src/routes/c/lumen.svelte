@@ -1,7 +1,7 @@
 <script lang="typescript">
     import get12Hour from '$lib/get12Hour'
     import hourNumbers from '$lib/hourNumbers'
-    export let time : Date;
+    export let time : Date = new Date();
     $: hour = time.getHours();
     $: minute = time.getMinutes();
     $: height = (((get12Hour(hour) * 60 + minute) / 720) * 50) - 6
